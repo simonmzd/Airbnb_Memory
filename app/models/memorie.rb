@@ -1,0 +1,2 @@
+class Memorie < ApplicationRecord
+end
