@@ -1,3 +1,12 @@
 <h1> <%= @memorie.title %> </h1>
-<p> <%= @memorie.description %> <p>
+<% if @memorie.images.attached? %>
+  <% @memorie.images.each do |image| %>
+    <%= image_tag url_for(image), height: 300, width: 400 %>
+  <% end %>
+<% else %>
+  <% @memorie.images.each do |image| %>
+    <%= cl_image_tag image.key, height: 300, width: 400, crop: :fill %>
+  <% end %>
+<% end %>
+<p> <%= @memorie.description %> </p>
 <%= link_to "Retour à la liste", memories_path %>
