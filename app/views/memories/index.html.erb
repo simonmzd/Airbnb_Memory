@@ -6,7 +6,7 @@
       <%= image_tag url_for(memorie.images.first), height: 300, width: 400 %>
     <% else %>
       <!-- Sinon, on suppose que l'image vient de Cloudinary -->
-      <%= cl_image_tag memorie.images.first.key, height: 300, width: 400, crop: :fill %>
+      <%= cl_image_tag(memorie.images.first.key, height: 300, width: 400, crop: :fill) %>
     <% end %>
   </div>
 <% end %>
