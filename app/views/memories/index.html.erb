@@ -1,3 +1,4 @@
 <% @memories.each do |memorie| %>
-  <%= link_to memorie.title, memorie_path(memorie) %>
+  <%= link_to memorie.title, memory_path(memorie) %>
+  <%= image_tag(memorie.image) %>
   <% end %>
