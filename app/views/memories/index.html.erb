@@ -1,12 +1,16 @@
-<% @memories.each do |memorie| %>
-  <div>
-    <%= link_to memorie.title, memory_path(memorie) %>
-
-    <% if memorie.images.attached? %>
-      <%= cl_image_tag memorie.images.first.key, height: 300, width: 400 %>
-    <% else %>
-      <%= image_tag "Lune.jpg", height: 300, width: 400 %>
+<div class="container mt-4">
+  <div class="row">
+    <% @memories.each do |memory| %>
+      <div class="col-md-4 mb-4">
+        <%= link_to memory_path(memory), class: "text-decoration-none text-dark" do %>
+          <div class="card h-100" style="border-radius: 10px;">
+            <%= cl_image_tag memory.images.first.key, class: "card-img-top", style: "height: 200px; object-fit: cover; border-radius: 10px;" %>
+            <div class="card-body">
+              <h5 class="card-title"><%= memory.title %></h5>
+            </div>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-
   </div>
-<% end %>
+</div>
