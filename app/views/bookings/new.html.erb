@@ -1,4 +1,6 @@
 <%= simple_form_for [@memorie, @booking] do |f| %>
-  <%= f.input :date %>
+  <%= f.input :date,
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
   <%= f.submit class: 'btn btn-flat' %>
 <% end %>
