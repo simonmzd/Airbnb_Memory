@@ -1,11 +1,11 @@
 class BookingsController < ApplicationController
   def new
-    @memorie = Memory.find(params[:memorie_id])
+    @memorie = Memorie.find(params[:memory_id])
     @booking = Booking.new
   end
 
   def create
-    @memorie = Memory.find(params[:memorie_id])
+    @memorie = Memorie.find(params[:memory_id])
     @booking = Booking.new(booking_params)
     @booking.save
     redirect_to booking_path(@booking)
