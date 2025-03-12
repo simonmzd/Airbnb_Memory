@@ -19,5 +19,35 @@
   </div>
 </div>
 
-<%= link_to "Ajoutez votre Mémoire", new_memory_path %>
+<div class="col-12 text-center mb-4">
+      <div class="add-memory">
+        <%= link_to "Ajoutez votre Mémoire", new_memory_path, class: "btn btn-custom" %>
+      </div>
+    </div>
+  </div>
+</div>
 
+<style>
+  .add-memory .btn-custom {
+    padding: 12px 24px;
+    background-color: #00C7BE;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 2px solid #00C7BE;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  .add-memory .btn-custom:hover {
+    background-color: white;
+    color: #00C7BE;
+  }
+  .add-memory {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .container {
+    padding-bottom: 30px;
+  }
+</style>
