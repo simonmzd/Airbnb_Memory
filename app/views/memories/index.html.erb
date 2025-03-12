@@ -1,12 +1,15 @@
 <% @memories.each do |memorie| %>
   <div>
     <%= link_to memorie.title, memory_path(memorie) %>
+
     <% if memorie.images.attached? %>
-      <!-- Si l'image est attachée via ActiveStorage -->
-      <%= image_tag url_for(memorie.images.first), height: 300, width: 400 %>
+    <% memorie.images.each do |image| %>
+
+      <%= cl_image_tag image.key, height: 300, width: 400 %>
+ <% end %>
     <% else %>
-      <!-- Sinon, on suppose que l'image vient de Cloudinary -->
-      <%= cl_image_tag(memorie.images.first.key, height: 300, width: 400, crop: :fill) %>
+      <%= image_tag "Lune.jpg", height: 300, width: 400 %>
     <% end %>
+
   </div>
 <% end %>
