@@ -3,10 +3,7 @@
     <%= link_to memorie.title, memory_path(memorie) %>
 
     <% if memorie.images.attached? %>
-    <% memorie.images.each do |image| %>
-
-      <%= cl_image_tag image.key, height: 300, width: 400 %>
- <% end %>
+      <%= cl_image_tag memorie.images.first.key, height: 300, width: 400 %>
     <% else %>
       <%= image_tag "Lune.jpg", height: 300, width: 400 %>
     <% end %>
