@@ -1,0 +1,59 @@
+.memory-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+  margin: 20px 0;
+  padding: 0 30px;
+}
+
+.date-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 210px;
+  max-width: 250px;
+}
+
+.buttons-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.action-btn {
+  background-color: #26A69A;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  text-decoration: none;
+}
+
+.action-btn:hover {
+  background-color: #2BBBAD;
+  transform: translateY(-2px);
+}
+
+.date-label {
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.datepicker {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 150px; // Largeur fixe pour le champ de date
+  max-width: 100%; // Empêche de dépasser la largeur du conteneur
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.datepicker:focus {
+  border-color: #26A69A;
+}

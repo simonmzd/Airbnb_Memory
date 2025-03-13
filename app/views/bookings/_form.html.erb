@@ -1,6 +1,9 @@
 <%= simple_form_for [@memorie, @booking] do |f| %>
   <%= f.input :date,
-            as: :string,
-            input_html: { data: { controller: "datepicker" } } %>
-  <%= f.submit class: 'btn btn-flat' %>
+              as: :string,
+              input_html: {
+                data: { controller: "datepicker" },
+                class: "form-control w-25 rounded-3 d-inline-block"
+              } %>
+  <%= f.submit "Create Booking", class: "btn btn-custom mr-2" %>
 <% end %>
