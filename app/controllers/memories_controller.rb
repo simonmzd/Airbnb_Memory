@@ -1,20 +1,18 @@
 class MemoriesController < ApplicationController
   def index
-
+    @memories = Memorie.all
+    if params[:query].present?
+      @memories = Memorie.search_all("#{params[:query]}")
+    end
     @markers = @memories.map do |memorie|
       next unless memorie.coordinates
+
       {
         lat: memorie.coordinates.first,
         lng: memorie.coordinates.last,
         info_window: render_to_string(partial: "memories/info_window", locals: { memorie: memorie })
       }
     end.compact
-
-    @memories = Memorie.all
-    if params[:query].present?
-      @memories = Memorie.search_all("#{params[:query]}")
-    end
-
   end
 
   def show

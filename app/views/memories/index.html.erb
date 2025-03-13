@@ -1,6 +1,6 @@
 <div class="container-fluid mt-4">
   <div class="row">
-    <!-- Cartes à gauche -->
+
     <div class="col-md-8">
       <div class="row">
         <% if @memories.any? %>
@@ -30,7 +30,6 @@
       </div>
     </div>
 
-    <!-- Carte Mapbox à droite -->
     <div class="col-md-4">
       <div id="map" class="sticky-map" style="height: 600px; border-radius: 10px;"></div>
     </div>
@@ -43,7 +42,7 @@
   </div>
 </div>
 
-<!-- Inclure Mapbox -->
+
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
 <script>
@@ -51,7 +50,7 @@
   const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v11',
-    center: [2.2137, 46.2276], // Centre par défaut (France)
+    center: [2.2137, 46.2276],
     zoom: 2
   });
 
