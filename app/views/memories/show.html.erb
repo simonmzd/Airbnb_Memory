@@ -1,20 +1,35 @@
-<h1> <%= @memorie.title %> </h1>
-<% if @memorie.images.attached? %>
-  <% @memorie.images.each do |image| %>
-    <%= image_tag url_for(image), height: 300, width: 400 %>
-  <% end %>
-<% else %>
-  <% @memorie.images.each do |image| %>
-    <%= cl_image_tag image.key, height: 300, width: 400, crop: :fill %>
-  <% end %>
-<% end %>
-<p> <%= @memorie.description %> </p>
-
+<div class="container mt-4">
+  <h1 class="mb-4" style="max-width: 50%;"><%= @memorie.title %></h1>
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card h-100" style="border: none; background: transparent;">
+        <% if @memorie.images.attached? && @memorie.images.first %>
+          <%= image_tag url_for(@memorie.images.first), class: "card-img-top", style: "height: 400px; object-fit: cover; border-radius: 10px;" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        <% if @memorie.images.attached? %>
+          <% @memorie.images.drop(1).first(4).each do |image| %>
+            <div class="col-md-6 mb-4">
+              <div class="card h-100" style="border: none; background: transparent;">
+                <%= image_tag url_for(image), class: "card-img-top", style: "height: 190px; object-fit: cover; border-radius: 10px;" %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <h2 class="mb-4" style="max-width: 50%;"><%= @memorie.description %></h2>
+  <div class="text-end" style="margin-bottom: 20px; margin-left: 20px;">
+    <%= link_to "Retour à la liste", memories_path, class: "btn btn-custom mr-2" %>
+  </div>
+</div>
 <div data-controller="toggle" class="mt-5">
   <button data-action="click->toggle#fire" class="btn btn-outline-primary">Reserver cette mémoire</button>
   <div data-toggle-target="togglableElement" class="d-none">
     <%= render "bookings/form", booking: @booking %>
   </div>
 </div>
-
-<%= link_to "Retour à la liste", memories_path %>
