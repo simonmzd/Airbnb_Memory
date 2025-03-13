@@ -2,7 +2,6 @@
   <h1 class="mb-4" style="color: #00C7BE;">Tableau de bord</h1>
 
   <h2 class="mb-3" style="color: #00C7BE;">Vos demandes de réservation</h2>
-
   <% if @received_bookings.any? %>
     <table class="table table-bordered">
       <thead>
@@ -23,10 +22,10 @@
             <td><%= booking.status %></td>
             <td>
               <div class="btn-group" role="group">
-                <%= button_to accept_memory_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-success btn-sm", style: "margin-right: 5px;" do %>
+                <%= button_to accept_memorie_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-success btn-sm", style: "margin-right: 5px;" do %>
                   <span style="color: white;">✔</span>
                 <% end %>
-                <%= button_to reject_memory_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-danger btn-sm" do %>
+                <%= button_to reject_memorie_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-danger btn-sm" do %>
                   <span style="color: white;">✖</span>
                 <% end %>
               </div>
@@ -40,7 +39,6 @@
   <% end %>
 
   <h2 class="mb-3 mt-5" style="color: #00C7BE;">Vos réservations à venir</h2>
-
   <% if @my_bookings.any? %>
     <table class="table table-bordered">
       <thead>
@@ -73,4 +71,31 @@
   <% else %>
     <p>Vous n'avez pas encore fait de réservation.</p>
   <% end %>
-</div>
+
+  <h2 class="mb-3 mt-5" style="color: #00C7BE;">Mes Mémoires</h2>
+  <% if @memories.any? %>
+    <div class="row">
+      <% @memories.each do |memorie| %>
+           <div class="col-md-4 mb-4">
+        <div class="card h-100 border-0 shadow-sm" style="border-radius: 10px; overflow: hidden;">
+          <%= link_to memory_path(memorie) do %>
+            <% if memorie.images.attached? && memorie.images.first %>
+              <%= cl_image_tag memorie.images.first.key, class: "card-img-top", style: "height: 200px; object-fit: cover; border: 5px solid #00C7BE; border-radius: 10px 10px 0 0;" %>
+            <% else %>
+              <%= image_tag "Logo.png", class: "card-img-top", style: "height: 200px; object-fit: cover; border: 5px solid #00C7BE; border-radius: 10px 10px 0 0;" %>
+            <% end %>
+          <% end %>
+          <div class="card-body text-center">
+            <h5 class="card-title"><%= memorie.title %></h5>
+            <div class="btn-group mt-3" role="group">
+              <%= link_to " ✏️ ", edit_memory_path(memorie), class: "p-2 fs-2 text-decoration-none" %>
+              <%= link_to " 🗑️ ", memory_path(memorie), class: "p-2 fs-2 text-decoration-none", data: { turbo_method: :delete, turbo_confirm: "Voulez-vous vraiment supprimer ?" }%>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>Vous n'avez pas encore créé de mémoire.</p>
+<% end %>
