@@ -14,13 +14,6 @@ Rails.application.routes.draw do
     end
   end
   get "dashboard", to: "pages#dashboard"
-  # resources :bookings, only: [] do
-  #   member do
-  #     patch :accept
-  #     patch :reject
-  #   end
-  # end
   # Defines the root path route ("/")
   # root "posts#index"
 end
-
