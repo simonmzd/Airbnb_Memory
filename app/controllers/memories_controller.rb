@@ -1,6 +1,9 @@
 class MemoriesController < ApplicationController
   def index
     @memories = Memorie.all
+    if params[:query].present?
+      @memories = Memorie.search_all("#{params[:query]}")
+    end
   end
 
   def show
@@ -14,7 +17,7 @@ class MemoriesController < ApplicationController
 
   def create
     @memorie = Memorie.new(memorie_params)
-    @memorie.user = current_user # Associe la mémoire à l'utilisateur connecté
+    @memorie.user = current_user
 
     # Convertir la date si elle est présente (Flatpickr envoie une chaîne)
     if params[:memorie][:date].present?
@@ -24,7 +27,7 @@ class MemoriesController < ApplicationController
     if @memorie.save
       redirect_to memory_path(@memorie), notice: "Souvenir créé avec succès !"
     else
-      puts @memorie.errors.full_messages # Affiche les erreurs en console
+      puts @memorie.errors.full_messages
       flash.now[:alert] = @memorie.errors.full_messages.join(", ")
       render :new, status: :unprocessable_entity
     end

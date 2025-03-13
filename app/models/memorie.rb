@@ -6,4 +6,10 @@ class Memorie < ApplicationRecord
   validates :description, presence: true
   validates :date, presence: true
   validates :location, presence: true
+  include PgSearch::Model
+  pg_search_scope :search_all,
+    against: %i[ title date description location ],
+    using: {
+      tsearch: { prefix: true }
+    }
 end
