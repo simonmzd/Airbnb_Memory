@@ -27,3 +27,9 @@
     <%= link_to "Retour à la liste", memories_path, class: "btn btn-custom mr-2" %>
   </div>
 </div>
+<div data-controller="toggle" class="mt-5">
+  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Reserver cette mémoire</button>
+  <div data-toggle-target="togglableElement" class="d-none">
+    <%= render "bookings/form", booking: @booking %>
+  </div>
+</div>
