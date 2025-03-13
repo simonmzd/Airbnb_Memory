@@ -4,7 +4,7 @@ import "controllers"
 import "@popperjs/core"
 import "bootstrap"
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('turbo:load', function() {
   const fileInput = document.getElementById('memorie_images');
   const fileLabel = document.getElementById('file-count-label');
 
