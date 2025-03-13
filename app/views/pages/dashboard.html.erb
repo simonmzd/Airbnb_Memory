@@ -20,8 +20,8 @@
           <td><%= booking.date %></td>
           <td><%= booking.status %></td>
           <td>
-            <%= link_to "Accepter", dashboard_path, method: :patch, class: "btn btn-success" %>
-            <%= link_to "Refuser", reject_memory_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-danger" %>
+            <%= button_to "Accepter", accept_memory_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-success" %>
+            <%= button_to "Refuser", reject_memory_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-danger" %>
           </td>
         </tr>
       <% end %>
@@ -58,7 +58,7 @@
             <% end %>
           </td>
           <td>
-            <%= link_to dashboard_path, data: {turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette réservation ?"} do %>
+            <%= link_to memory_booking_path(booking.memorie, booking), data: {turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette réservation ?"} do %>
               <i class="fas fa-trash-alt"></i>
             <% end %>
           </td>

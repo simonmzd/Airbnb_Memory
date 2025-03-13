@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_memorie, only: %i[new create accept reject destroy]
-  before_action :set_booking, only: %i[accept reject destroy]
+  before_action :set_booking, only: %i[destroy]
 
   def new
     @memorie = Memorie.find(params[:memory_id])
@@ -20,18 +20,23 @@ class BookingsController < ApplicationController
   end
 
   def accept
+    @booking = Booking.find(params[:id])
     @booking.update(status: "accepté")
     redirect_to dashboard_path, notice: "Réservation acceptée"
   end
 
   def reject
+    @booking = Booking.find(params[:id])
     @booking.update(status: "refusé")
     redirect_to dashboard_path, notice: "Réservation refusée"
   end
 
   def destroy
-    @booking.destroy
-    redirect_to dashboard_path
+    if @booking.destroy
+      redirect_to dashboard_path, notice: "Réservation supprimée avec succès"
+    else
+      redirect_to dashboard_path, alert: "Erreur lors de la suppression"
+    end
   end
 
   private
