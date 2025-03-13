@@ -1,71 +1,76 @@
-<h1>Tableau de bord</h1>
-<h2>Demandes de réservation</h2>
+<div class="container mt-4">
+  <h1 class="mb-4" style="color: #00C7BE;">Tableau de bord</h1>
 
-<% if @received_bookings.any? %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Mémoire</th>
-        <th>Client</th>
-        <th>Date</th>
-        <th>Statut</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @received_bookings.each do |booking| %>
-        <tr>
-          <td><%= booking.memorie.title %></td>
-          <td><%= booking.user.email %></td>
-          <td><%= booking.date %></td>
-          <td><%= booking.status %></td>
-          <td>
-            <%= link_to "Accepter", dashboard_path, method: :patch, class: "btn btn-success" %>
-            <%= link_to "Refuser", reject_memory_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-danger" %>
-          </td>
+  <h2 class="mb-3" style="color: #00C7BE;">Vos demandes de réservation</h2>
+
+  <% if @received_bookings.any? %>
+    <table class="table table-bordered">
+      <thead>
+        <tr style="background-color: #ADD8E6; border-radius: 10px; text-align: center;">
+          <th style="padding: 10px;">Mémoire</th>
+          <th style="padding: 10px;">Date</th>
+          <th style="padding: 10px;">Client</th>
+          <th style="padding: 10px;">Statut</th>
+          <th style="padding: 10px;">Votre choix</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @received_bookings.each do |booking| %>
+          <tr style="text-align: center;">
+            <td><%= booking.memorie.title %></td>
+            <td><%= booking.date.strftime("%d/%m/%Y") %></td>
+            <td><%= booking.user.email %></td>
+            <td><%= booking.status %></td>
+            <td>
+              <div class="btn-group" role="group">
+                <%= button_to accept_memory_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-success btn-sm", style: "margin-right: 5px;" do %>
+                  <span style="color: white;">✔</span>
+                <% end %>
+                <%= button_to reject_memory_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-danger btn-sm" do %>
+                  <span style="color: white;">✖</span>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% else %>
-  <p>Aucune demande de réservation.</p>
-<% end %>
+    <p>Aucune demande de réservation.</p>
+  <% end %>
 
-<h2>Mes réservations</h2>
-<% if @my_bookings.any? %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Mémoire</th>
-        <th>Propriétaire</th>
-        <th>Date</th>
-        <th>Statut</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @my_bookings.each do |booking| %>
-        <tr>
-          <td><%= booking.memorie.title %></td>
-          <td><%= booking.memorie.user.email %></td>
-          <td><%= booking.date %></td>
-          <td>
-            <% if booking.status == "en attente" %>
-              <span class="badge bg-warning">En attente</span>
-            <% elsif booking.status == "accepté" %>
-              <span class="badge bg-success">Accepté</span>
-            <% else %>
-              <span class="badge bg-danger">Refusé</span>
-            <% end %>
-          </td>
-          <td>
-            <%= link_to dashboard_path, data: {turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette réservation ?"} do %>
-              <i class="fas fa-trash-alt"></i>
-            <% end %>
-          </td>
+  <h2 class="mb-3 mt-5" style="color: #00C7BE;">Vos réservations à venir</h2>
+
+  <% if @my_bookings.any? %>
+    <table class="table table-bordered">
+      <thead>
+        <tr style="background-color: #ADD8E6; border-radius: 10px; text-align: center;">
+          <th style="padding: 10px;">Mémoire</th>
+          <th style="padding: 10px;">Date de location</th>
+          <th style="padding: 10px;">Propriétaire</th>
+          <th style="padding: 10px;">Statut</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>Vous n'avez pas encore fait de réservation.</p>
-<% end %>
+      </thead>
+      <tbody>
+        <% @my_bookings.each do |booking| %>
+          <tr style="text-align: center;">
+            <td><%= booking.memorie.title %></td>
+            <td><%= booking.date.strftime("%d/%m/%Y") %></td>
+            <td><%= booking.memorie.user.email %></td>
+            <td>
+              <% if booking.status == "en attente" %>
+                <span class="badge bg-warning">En attente</span>
+              <% elsif booking.status == "accepté" %>
+                <span class="badge bg-success">Confirmée</span>
+              <% else %>
+                <span class="badge bg-danger">Refusée</span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>Vous n'avez pas encore fait de réservation.</p>
+  <% end %>
+</div>

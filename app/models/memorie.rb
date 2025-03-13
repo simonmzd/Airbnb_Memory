@@ -4,7 +4,8 @@ class Memorie < ApplicationRecord
   has_many_attached :images
   validates :title, presence: true
   validates :description, presence: true
-
+  validates :date, presence: true
+  validates :location, presence: true
   include PgSearch::Model
   pg_search_scope :search_all,
     against: %i[ title date description location ],
