@@ -10,7 +10,7 @@ puts "Create Memories"
 memorie_1 = Memorie.create(
   date: Date.new(1492, 1, 1),
   location: "Etats-Unis",
-  title: "La découverte de l'Amérique par Christophe Colomb (1492)",
+  title: "La découverte de l'Amérique par Christophe Colomb",
   description: "Revivez la découverte de l'Amérique : une aventure immersive et historique !",
   image: "amerique.jpg",
   user: mel
@@ -19,7 +19,7 @@ memorie_1 = Memorie.create(
 memorie_2 = Memorie.create(
   date: Date.new(1969, 7, 20),
   location: "Lune",
-  title: "Le premier pas sur la Lune (1969) 🌕🚀",
+  title: "Le premier pas sur la Lune 🌕🚀",
   description: "Revivez le premier pas sur la Lune : une expérience lunaire inoubliable !",
   image: "Lune.jpg",
   user: quentin
@@ -28,7 +28,7 @@ memorie_2 = Memorie.create(
 memorie_3 = Memorie.create(
   date: Date.new(800, 12, 25),
   location: "Rome, Italie",
-  title: "Le couronnement de Charlemagne (800 ap. J.-C.)",
+  title: "Le couronnement de Charlemagne",
   description: "Revivez le couronnement de Charlemagne : une plongée historique fascinante !",
   image: "Charlemagne.jpg",
   user: simon
@@ -37,7 +37,7 @@ memorie_3 = Memorie.create(
 memorie_4 = Memorie.create(
   date: Date.new(-2600, 1, 1),
   location: "Gizeh, Egypte",
-  title: "La construction des pyramides d’Égypte (vers 2600 av. J.-C.) 🏗️🔺",
+  title: "La construction des pyramides d’Égypte 🏗️🔺",
   description: "Revivez la construction des pyramides d’Égypte : une aventure historique captivante !",
   image: "Pyramide.jpg",
   user: mel
@@ -46,7 +46,7 @@ memorie_4 = Memorie.create(
 memorie_5 = Memorie.create(
   date: Date.new(1804, 12, 2),
   location: "Paris, France",
-  title: "Le sacre de Napoléon à Notre-Dame (1804) 👑",
+  title: "Le sacre de Napoléon à Notre-Dame 👑",
   description: "Revivez le sacre de Napoléon : une cérémonie impériale grandiose !",
   image: "nap.jpg",
   user: quentin
@@ -55,7 +55,7 @@ memorie_5 = Memorie.create(
 memorie_6 = Memorie.create(
   date: Date.new(1918, 11, 11),
   location: "France",
-  title: "L’Armistice du 11 novembre 1918 ☮️",
+  title: "L’Armistice de la 2nde Guerre Mondiale ☮️",
   description: "Revivez l'armistice de 1918 : un moment historique de paix !",
   image: "Armistice.jpg",
   user: simon

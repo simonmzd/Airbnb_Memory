@@ -1,1 +1,8 @@
 // Specific CSS for your home-page
+
+.sticky-map {
+  position: sticky;
+  top: 56px; /* Ajuste selon la hauteur de ta navbar */
+  height: calc(100vh - 56px); /* Hauteur de la carte = hauteur de la fenêtre - hauteur de la navbar */
+  z-index: 1000; /* Assure que la carte reste au-dessus des autres éléments */
+}
