@@ -1,0 +1,30 @@
+header {
+  background-color: #26A69A;
+}
+
+.login-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.form-control.custom-input {
+  border-color: #26A69A !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control.custom-input:focus {
+  border-color: #26A69A;
+  box-shadow: 0 0 5px rgba(38, 166, 154, 0.5);
+}
+
+.btn-success {
+  background-color: #26A69A;
+  border-color: #26A69A;
+}
+
+.btn-success:hover {
+  background-color: #2BBBAD;
+  border-color: #2BBBAD;
+}

@@ -1,20 +1,6 @@
 class MemoriesController < ApplicationController
   def index
-    if params[:query].present?
-      # Recherche textuelle simple sur titre, description, location, et année
-      @memories = Memorie.all.select do |memorie|
-        memorie.title.downcase.include?(params[:query].downcase) ||
-        memorie.description.downcase.include?(params[:query].downcase) ||
-        memorie.location.downcase.include?(params[:query].downcase) ||
-        memorie.date&.year.to_s == params[:query]
-      end
-      # Recherche géographique si l'adresse est incluse
-      @memories = Geocoder.search(params[:query]).first&.nearby(1000, units: :km) & @memories if Geocoder.search(params[:query]).present?
-    else
-      @memories = Memorie.all
-    end
 
-    # Préparer les marqueurs pour la carte
     @markers = @memories.map do |memorie|
       next unless memorie.coordinates
       {
@@ -23,6 +9,12 @@ class MemoriesController < ApplicationController
         info_window: render_to_string(partial: "memories/info_window", locals: { memorie: memorie })
       }
     end.compact
+
+    @memories = Memorie.all
+    if params[:query].present?
+      @memories = Memorie.search_all("#{params[:query]}")
+    end
+
   end
 
   def show
