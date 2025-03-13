@@ -3,6 +3,18 @@ class MemoriesController < ApplicationController
 
   def index
     @memories = Memorie.all
+    if params[:query].present?
+      @memories = Memorie.search_all("#{params[:query]}")
+    end
+    @markers = @memories.map do |memorie|
+      next unless memorie.coordinates
+
+      {
+        lat: memorie.coordinates.first,
+        lng: memorie.coordinates.last,
+        info_window: render_to_string(partial: "memories/info_window", locals: { memorie: memorie })
+      }
+    end.compact
   end
 
   def show
@@ -17,8 +29,7 @@ class MemoriesController < ApplicationController
   def create
     @memorie = Memorie.new(memorie_params)
     @memorie.user = current_user
-
-
+    
     if params[:memorie][:date].present?
       @memorie.date = Date.parse(params[:memorie][:date])
     end

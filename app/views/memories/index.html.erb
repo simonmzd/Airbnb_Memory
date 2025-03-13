@@ -1,29 +1,69 @@
-<div class="container mt-4">
+<div class="container-fluid mt-4">
   <div class="row">
-    <% @memories.each do |memorie| %>
-      <div class="col-md-4 mb-4">
-        <%= link_to memory_path(memorie), class: "text-decoration-none text-dark" do %>
-          <div class="card h-100" style="border-radius: 10px;">
-          <% if memorie.images.attached? %>
-            <%= cl_image_tag memorie.images.first.key, class: "card-img-top", style: "height: 200px; object-fit: cover; border-radius: 10px;" %>
-          <% else %>
-            <%= image_tag "Logo.png", class: "card-img-top", style: "height: 200px; object-fit: cover; border-radius: 10px;" %>
+
+    <div class="col-md-8">
+      <div class="row">
+        <% if @memories.any? %>
+          <% @memories.each_slice(2) do |memorie_group| %>
+            <% memorie_group.each do |memorie| %>
+              <div class="col-md-6 mb-4">
+                <%= link_to memory_path(memorie), class: "text-decoration-none text-dark" do %>
+                  <div class="card h-100" style="border-radius: 10px;">
+                    <% if memorie.images.attached? %>
+                      <%= cl_image_tag memorie.images.first.key, class: "card-img-top", style: "height: 200px; object-fit: cover; border-radius: 10px;" %>
+                    <% else %>
+                      <%= image_tag "Logo.png", class: "card-img-top", style: "height: 200px; object-fit: cover; border-radius: 10px;" %>
+                    <% end %>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= memorie.title %></h5>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
           <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= memorie.title %></h5>
-            </div>
+        <% else %>
+          <div class="col-12 text-center">
+            <p>Aucune mémoire trouvée.</p>
           </div>
         <% end %>
       </div>
-    <% end %>
-  </div>
-</div>
+    </div>
 
-<div class="col-12 text-center mb-4">
-      <div class="add-memory">
-        <%= link_to "Ajoutez votre Mémoire", new_memory_path, class: "btn btn-custom mr-2" %>
-      </div>
+    <div class="col-md-4">
+      <div id="map" class="sticky-map" style="height: 600px; border-radius: 10px;"></div>
+    </div>
+  </div>
+
+  <div class="col-12 text-center mb-4">
+    <div class="add-memory">
+      <%= link_to "Ajoutez votre Mémoire", new_memory_path, class: "btn btn-custom mr-2" %>
     </div>
   </div>
 </div>
 
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+<script>
+  mapboxgl.accessToken = '<%= ENV["MAPBOX_API_KEY"] %>';
+  const map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [2.2137, 46.2276],
+    zoom: 2
+  });
+
+  const markers = <%= raw @markers.to_json %>;
+  markers.forEach(marker => {
+    new mapboxgl.Marker()
+      .setLngLat([marker.lng, marker.lat])
+      .setPopup(new mapboxgl.Popup().setHTML(marker.info_window))
+      .addTo(map);
+  });
+
+  if (markers.length > 0) {
+    const bounds = new mapboxgl.LngLatBounds();
+    markers.forEach(marker => bounds.extend([marker.lng, marker.lat]));
+    map.fitBounds(bounds, { padding: 50 });
+  }
+</script>
