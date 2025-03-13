@@ -3,6 +3,8 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "@popperjs/core"
 import "bootstrap"
+import "flatpickr"
+
 
 document.addEventListener('turbo:load', function() {
   const fileInput = document.getElementById('memorie_images');
@@ -21,3 +23,5 @@ document.addEventListener('turbo:load', function() {
       console.error('Éléments #memorie_images ou #file-count-label non trouvés.');
   }
 });
+
+

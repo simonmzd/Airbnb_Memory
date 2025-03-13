@@ -23,12 +23,12 @@
     </div>
   </div>
   <h2 class="mb-4" style="max-width: 50%;"><%= @memorie.description %></h2>
-  <div class="text-end" style="margin-bottom: 20px; margin-left: 20px;">
+</div>
+<div data-controller="toggle" class="m-5">
+  <div class="d-flex justify-content-between" style="margin-bottom: 20px; margin-left: 20px;">
+    <button data-action="click->toggle#fire" class="btn btn-custom mr-2 ">Reserver cette mémoire</button>
     <%= link_to "Retour à la liste", memories_path, class: "btn btn-custom mr-2" %>
   </div>
-</div>
-<div data-controller="toggle" class="mt-5">
-  <button data-action="click->toggle#fire" class="btn btn-outline-primary">Reserver cette mémoire</button>
   <div data-toggle-target="togglableElement" class="d-none">
     <%= render "bookings/form", booking: @booking %>
   </div>
