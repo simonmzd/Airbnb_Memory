@@ -76,7 +76,12 @@
     <p>Vous n'avez pas encore fait de réservation.</p>
   <% end %>
 
-  <h2 class="mb-3 mt-5" style="color: #00C7BE;">Mes mémoires</h2>
+  <div class="d-flex align-items-center justify-content-start mt-5 mb-3">
+    <h2 style="color: #00C7BE;">Mes mémoires</h2>
+    <%= link_to new_memory_path do%>
+      <i class="fa-solid fa-square-plus ms-3 fs-3" style="color: #32ADE6"></i>
+    <% end %>
+  </div>
   <% if @memories.any? %>
     <div class="row">
       <% @memories.each do |memorie| %>
