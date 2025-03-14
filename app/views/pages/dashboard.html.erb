@@ -87,6 +87,9 @@
           <% end %>
           <div class="card-body text-center">
             <h5 class="card-title"><%= memorie.title %></h5>
+            <p class="card-text text-muted">
+              ⏳ <%= memorie.date.present? ? memorie.date.strftime("%d/%m/%Y") : "Date non définie" %>
+            </p>
             <div class="btn-group mt-3" role="group">
               <%= link_to " ✏️ ", edit_memory_path(memorie), class: "p-2 fs-2 text-decoration-none" %>
               <%= link_to " 🗑️ ", memory_path(memorie), class: "p-2 fs-2 text-decoration-none", data: { turbo_method: :delete, turbo_confirm: "Voulez-vous vraiment supprimer ?" }%>

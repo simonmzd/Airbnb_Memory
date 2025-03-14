@@ -27,7 +27,7 @@
 <div data-controller="toggle" class="m-5">
   <div class="d-flex justify-content-between" style="margin-bottom: 20px; margin-left: 20px;">
     <button data-action="click->toggle#fire" class="btn btn-custom mr-2 ">Reserver cette mémoire</button>
-    <%= link_to "Retour à la liste", memories_path, class: "btn btn-custom mr-2" %>
+    <%= link_to "Retour à la liste", root_path, class: "btn btn-custom mr-2" %>
   </div>
   <div data-toggle-target="togglableElement" class="d-none">
     <%= render "bookings/form", booking: @booking %>
