@@ -3,15 +3,15 @@ class MemoriesController < ApplicationController
 
   def index
     @memories = Memorie.all
-    if params[:query].present?
-      @memories = Memorie.search_all("#{params[:query]}")
-    end
-    @markers = @memories.map do |memorie|
-      next unless memorie.coordinates
 
+    # Préparer les marqueurs pour la carte
+    @markers = @memories.map do |memorie|
+      coords = memorie.coordinates || (memorie.location == "Lune" ? [0, 0] : nil)
+      next unless coords
       {
-        lat: memorie.coordinates.first,
-        lng: memorie.coordinates.last,
+        id: memorie.id,
+        lat: coords.first,
+        lng: coords.last,
         info_window: render_to_string(partial: "memories/info_window", locals: { memorie: memorie })
       }
     end.compact
