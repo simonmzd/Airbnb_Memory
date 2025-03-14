@@ -1,5 +1,7 @@
-<div>
-  <h6><%= memorie.title %></h6>
-  <p><%= memorie.location %></p>
-  <p>Date: <%= memorie.date.strftime("%d/%m/%Y") %></p>
-</div>
+<%= link_to memory_path(memorie), class: "text-dark text-decoration-none info-window-link" do %>
+  <div class="info-window">
+    <h6><%= memorie.title %></h6>
+    <p><%= memorie.location %></p>
+    <p>Date: <%= memorie.date.strftime("%d/%m/%Y") %></p>
+  </div>
+<% end %>
