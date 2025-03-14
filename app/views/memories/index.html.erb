@@ -16,6 +16,9 @@
                     <% end %>
                     <div class="card-body">
                       <h5 class="card-title"><%= memorie.title %></h5>
+                      <p class="card-text text-muted">
+                       ⏳ <%= memorie.date.present? ? memorie.date.strftime("%d/%m/%Y") : "Date non définie" %>
+                      </p>
                     </div>
                   </div>
                 <% end %>
@@ -35,12 +38,6 @@
     </div>
   </div>
 
-  <div class="col-12 text-center mb-4">
-    <div class="add-memory">
-      <%= link_to "Ajoutez votre Mémoire", new_memory_path, class: "btn btn-custom mr-2" %>
-    </div>
-  </div>
-</div>
 
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />

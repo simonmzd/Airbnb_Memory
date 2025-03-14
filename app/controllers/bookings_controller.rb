@@ -13,7 +13,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.status = "en attente"
     if @booking.save
-      redirect_to dashboard_path, notice: "Votre réservation a bien été envoyée."
+      redirect_to dashboard_path
     else
       render 'memories/show', alert: "Il y a eu un problème avec votre réservation."
     end
@@ -22,18 +22,18 @@ class BookingsController < ApplicationController
   def accept
     @booking = Booking.find(params[:id])
     @booking.update(status: "accepté")
-    redirect_to dashboard_path, notice: "Réservation acceptée"
+    redirect_to dashboard_path
   end
 
   def reject
     @booking = Booking.find(params[:id])
     @booking.update(status: "refusé")
-    redirect_to dashboard_path, notice: "Réservation refusée"
+    redirect_to dashboard_path
   end
 
   def destroy
     if @booking.destroy
-      redirect_to dashboard_path, notice: "Réservation supprimée avec succès"
+      redirect_to dashboard_path
     else
       redirect_to dashboard_path, alert: "Erreur lors de la suppression"
     end
