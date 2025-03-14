@@ -3,9 +3,9 @@
 
   <h2 class="mb-3" style="color: #00C7BE;">Vos demandes de réservation</h2>
   <% if @received_bookings.any? %>
-    <table class="table table-bordered">
-      <thead>
-        <tr style="background-color: #ADD8E6; border-radius: 10px; text-align: center;">
+    <table class="table border-0 table-borderless">
+      <thead class="bg-info text-white">
+        <tr style="text-align: center">
           <th style="padding: 10px;">Mémoire</th>
           <th style="padding: 10px;">Date</th>
           <th style="padding: 10px;">Client</th>
@@ -19,13 +19,13 @@
             <td><%= booking.memorie.title %></td>
             <td><%= booking.date.strftime("%d/%m/%Y") %></td>
             <td><%= booking.user.email %></td>
-            <td><%= booking.status %></td>
+            <td><%= booking.status.capitalize %></td>
             <td>
               <div class="btn-group" role="group">
-                <%= button_to accept_memory_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-success btn-sm", style: "margin-right: 5px;" do %>
+                <%= button_to accept_memory_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-success btn-sm rounded-circle", style: "margin-right: 5px;" do %>
                   <span style="color: white;">✔</span>
                 <% end %>
-                <%= button_to reject_memory_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-danger btn-sm" do %>
+                <%= button_to reject_memory_booking_path(booking.memorie, booking), method: :patch, class: "btn btn-danger btn-sm rounded-circle" do %>
                   <span style="color: white;">✖</span>
                 <% end %>
               </div>
@@ -40,13 +40,14 @@
 
   <h2 class="mb-3 mt-5" style="color: #00C7BE;">Vos réservations à venir</h2>
   <% if @my_bookings.any? %>
-    <table class="table table-bordered">
+    <table class="table border-0 table-borderless">
       <thead>
-        <tr style="background-color: #ADD8E6; border-radius: 10px; text-align: center;">
+        <tr style="text-align: center">
           <th style="padding: 10px;">Mémoire</th>
           <th style="padding: 10px;">Date de location</th>
           <th style="padding: 10px;">Propriétaire</th>
           <th style="padding: 10px;">Statut</th>
+          <th style="padding: 10px;">Supprimer</th>
         </tr>
       </thead>
       <tbody>
@@ -59,10 +60,13 @@
               <% if booking.status == "en attente" %>
                 <span class="badge bg-warning">En attente</span>
               <% elsif booking.status == "accepté" %>
-                <span class="badge bg-success">Confirmée</span>
+                <span class="badge bg-success">Confirmé</span>
               <% else %>
-                <span class="badge bg-danger">Refusée</span>
+                <span class="badge bg-danger">Refusé</span>
               <% end %>
+            </td>
+            <td>
+              <%= link_to "🗑️", memory_booking_path(booking.memorie, booking), class: "text-decoration-none", data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette réservation ?" } %>
             </td>
           </tr>
         <% end %>
@@ -72,7 +76,7 @@
     <p>Vous n'avez pas encore fait de réservation.</p>
   <% end %>
 
-  <h2 class="mb-3 mt-5" style="color: #00C7BE;">Mes Mémoires</h2>
+  <h2 class="mb-3 mt-5" style="color: #00C7BE;">Mes mémoires</h2>
   <% if @memories.any? %>
     <div class="row">
       <% @memories.each do |memorie| %>
