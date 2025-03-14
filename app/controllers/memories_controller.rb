@@ -3,8 +3,9 @@ class MemoriesController < ApplicationController
 
   def index
     @memories = Memorie.all
-
-    # Préparer les marqueurs pour la carte
+    if params[:query].present?
+      @memories = Memorie.search_all("#{params[:query]}")
+    end
     @markers = @memories.map do |memorie|
       coords = memorie.coordinates || (memorie.location == "Lune" ? [0, 0] : nil)
       next unless coords

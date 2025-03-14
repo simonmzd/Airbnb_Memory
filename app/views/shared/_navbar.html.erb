@@ -10,7 +10,7 @@
 
       <% if current_page?(root_path) || params[:query].present? %>
         <div class="flex-grow-1 d-flex justify-content-center">
-          <%= form_with url: memories_path, method: :get, class: "w-50 position-relative" do %>
+          <%= form_with url: root_path, method: :get, local: true, class: "w-50 position-relative" do %>
             <%= text_field_tag :query,
                 params[:query],
                 class: "form-control form-control-sm text-start ps-5 rounded-3",

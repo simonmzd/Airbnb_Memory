@@ -22,7 +22,14 @@
       </div>
     </div>
   </div>
-  <h2 class="mb-4" style="max-width: 50%;"><%= @memorie.description %></h2>
+  <h2 class="mb-4 w-50"><%= @memorie.description %></h2>
+  <p class="card-text text-muted">
+    ⏳ <%= @memorie.date.present? ? @memorie.date.strftime("%d/%m/%Y") : "Date non définie" %>
+  </p>
+  <p>
+  <i class="fa-solid fa-location-dot"></i>
+  <span><%= @memorie.location %></span>
+  </p>
 </div>
 <div data-controller="toggle" class="m-5">
   <div class="d-flex justify-content-between" style="margin-bottom: 20px; margin-left: 20px;">
