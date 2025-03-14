@@ -29,13 +29,13 @@ class MemoriesController < ApplicationController
   def create
     @memorie = Memorie.new(memorie_params)
     @memorie.user = current_user
-    
+
     if params[:memorie][:date].present?
       @memorie.date = Date.parse(params[:memorie][:date])
     end
 
     if @memorie.save
-      redirect_to memory_path(@memorie), notice: "Souvenir créé avec succès !"
+      redirect_to memory_path(@memorie)
     else
       puts @memorie.errors.full_messages
       flash.now[:alert] = @memorie.errors.full_messages.join(", ")
@@ -47,7 +47,7 @@ class MemoriesController < ApplicationController
 
   def update
     if @memorie.update(memorie_params)
-      redirect_to dashboard_path, notice: "Mémoire mise à jour avec succès."
+      redirect_to dashboard_path
     else
       puts @memorie.errors.full_messages
       flash.now[:alert] = @memorie.errors.full_messages.join(", ")

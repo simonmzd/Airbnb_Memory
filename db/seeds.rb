@@ -4,9 +4,7 @@ User.destroy_all
 mel = User.create(email: "melanie.lepage86@hotmail.fr", password: "Mémory")
 simon = User.create(email: "mazaudsimon@gmail.com", password: "memory")
 quentin = User.create(email: "sainton.quentin86@gmail.com", password: "Memory")
-puts "Create Memories"
 
-puts "Create Memories"
 memorie_1 = Memorie.create(
   date: Date.new(1492, 1, 1),
   location: "Etats-Unis",
